@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<head>
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+    <title>XtraCurricular Zone</title>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+
+<body>
+
+
+    <div id="app">
+        <div id="top-nav-left">
+            <a href="cw.html">XtraCurricular Zone</a>
+        </div>
+        <div id="top-nav-right">
+            <a>Maths Revision</a>
+            <a>TableTennis</a>
+            <a>Football</a>
+            <button>
+                Basket({{cartItemCount}})
+                <!-- 'cartItemCount' is used the same way as a data property. -->
+            </button>
+        </div>
+        <div id="main"></div>
+        <div id="top-nav-center"></div>
+        <!-- The <div> ID will be used to link to the Vue.js code -->
+        <h1>Activities</h1>
+        <div class="cart">
+            <p>{{product.maths.subject}}</p>
+            <p>{{product.maths.location}}</p>
+            <p>Price: £{{product.maths.price}}</p>
+            <p>Spaces Left: {{product.maths.spaces}}</p>
+            <button v-on:click="buy()">Buy</button>
+        </div>
+
+        <div class="cart">
+            <p>{{product.english.subject}}</p>
+            <p>{{product.english.location}}</p>
+            <p>Price: £{{product.english.price}}</p>
+            <p>Spaces Left: {{product.english.spaces}}</p>
+            <button v-on:click="buy()">Buy</button>
+        </div>
+
+    </div>
+
+    <script>
+        let app = new Vue({ // the root Vue instance
+            el: '#app', // this links to the <div> with the ID #app
+            data: {
+                product: {
+
+                    maths: {
+                    id: 1001,
+                    subject: "Maths",
+                    price: 100,
+                    spaces: 5,
+                    location: "London"
+                },
+
+                english: {
+                    id: 1002,
+                    subject: "English",
+                    price: 150,
+                    spaces: 5,
+                    location: "Machester"
+                },
+
+                },
+
+                
+
+                cart: []
+            },
+
+            computed: { // the Computed Property object
+                cartItemCount: function () { // the property name
+                    // its value is calculated when it is called
+                    return this.cart.length || "0";
+                }
+
+            },
+
+            methods: {
+                buy() {
+                    if (product.this.spaces > 0) {
+                        product.this.spaces--;
+
+                    }
+                    this.cart.push(product.this.id);
+                },
+
+
+            },
+
+
+        })
+    </script>
+</body>
+
+</html>
