@@ -1,6 +1,6 @@
 const lessonsArray =
 {
-    "example": [1000, "Example Subject", 100, 5, "Example Location", "Example Image"],
+    "example": [0000, "Example Subject", 100, 5, "Example Location", "Example Image"],
     "maths": [1001, "Maths", 100, 5, "London", "Example Image"],
     "english": [1002, "English", 100, 5, "London", "Example Image"],
     "french": [1003, "French", 100, 5, "London", "Example Image"],
