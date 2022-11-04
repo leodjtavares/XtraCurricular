@@ -6,11 +6,14 @@
 
 <head>
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+    <script src="../js/products.js"></script>
     <title>XtraCurricular Zone</title>
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+
 </head>
+
 
 <body>
 
@@ -20,9 +23,6 @@
             <a href="cw.html">XtraCurricular Zone</a>
         </div>
         <div id="top-nav-right">
-            <a>Maths Revision</a>
-            <a>TableTennis</a>
-            <a>Football</a>
             <button>
                 Basket({{cartItemCount}})
                 <!-- 'cartItemCount' is used the same way as a data property. -->
@@ -32,20 +32,16 @@
         <div id="top-nav-center"></div>
         <!-- The <div> ID will be used to link to the Vue.js code -->
         <h1>Activities</h1>
-        <div class="cart">
-            <p>{{product.maths.subject}}</p>
-            <p>{{product.maths.location}}</p>
-            <p>Price: £{{product.maths.price}}</p>
-            <p>Spaces Left: {{product.maths.spaces}}</p>
-            <button v-on:click="buy()">Buy</button>
-        </div>
 
-        <div class="cart">
-            <p>{{product.english.subject}}</p>
-            <p>{{product.english.location}}</p>
-            <p>Price: £{{product.english.price}}</p>
-            <p>Spaces Left: {{product.english.spaces}}</p>
+
+        <div v-for="product in products" class="cart">
+
+            <h2>{{product.activity}}</h2>
+            <p>Price: £{{product.price}}</p>
+            <p>Location: {{product.location}}</p>
+            <p>Spaces Left: {{product.availableSpaces}}</p>
             <button v-on:click="buy()">Buy</button>
+
         </div>
 
     </div>
@@ -54,27 +50,7 @@
         let app = new Vue({ // the root Vue instance
             el: '#app', // this links to the <div> with the ID #app
             data: {
-                product: {
-
-                    maths: {
-                    id: 1001,
-                    subject: "Maths",
-                    price: 100,
-                    spaces: 5,
-                    location: "London"
-                },
-
-                english: {
-                    id: 1002,
-                    subject: "English",
-                    price: 150,
-                    spaces: 5,
-                    location: "Machester"
-                },
-
-                },
-
-                
+                products: product,
 
                 cart: []
             },
@@ -89,14 +65,11 @@
 
             methods: {
                 buy() {
-                    if (product.this.spaces > 0) {
-                        product.this.spaces--;
-
+                    if (this.product.spaces > 0) {
+                        this.product.spaces--;
                     }
-                    this.cart.push(product.this.id);
+                    this.cart.push(this.product.id);
                 },
-
-
             },
 
 
