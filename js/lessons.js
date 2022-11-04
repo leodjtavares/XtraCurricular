@@ -12,13 +12,3 @@ const lessonsArray =
     "example": [1009, "Example Subject", 100, 5, "Example Location", "Example Image"],
     "example": [1010, "Example Subject", 100, 5, "Example Location", "Example Image"],
 };
-
-const lessons = JSON.parse(lessonsArray);
-
-// TODO: turn this into vue function
-document.getElementById("example-id").innerHTML = lessons.example[0];
-document.getElementById("example-subject").innerHTML = lessons.example[1];
-document.getElementById("example-price").innerHTML = lessons.example[2];
-document.getElementById("example-spaces").innerHTML = lessons.example[3];
-document.getElementById("example-location").innerHTML = lessons.example[4];
-document.getElementById("example-image").innerHTML = lessons.example[5];
