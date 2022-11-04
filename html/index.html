@@ -24,7 +24,7 @@
         </div>
         <div id="top-nav-right">
             <button>
-                Basket({{cartItemCount}})
+                Basket({{cartCount}})
                 <!-- 'cartItemCount' is used the same way as a data property. -->
             </button>
         </div>
@@ -40,8 +40,19 @@
             <p>Price: £{{product.price}}</p>
             <p>Location: {{product.location}}</p>
             <p>Spaces Left: {{product.availableSpaces}}</p>
-            <button v-on:click="buy()">Buy</button>
-
+            <div><button v-on:click="buy(product)" v-if='canBuy(product)'>Buy</button>
+            </div>
+            <div class="availability">
+                <span v-if='product.availableSpaces === cartItemCount(product.spaces)'>All out!</span>
+                <span v-else-if="product.availableSpaces - cartItemCount(product.spaces) < 5">
+                    Only {{product.availableSpaces - cartItemCount(product.spaces)}} left!
+                </span>
+                <span v-else>Buy now!</span>
+            </div>
+            <div class="rating">
+                <span v-for='n in product.rating'>★</span>
+                <span v-for='n in 5 - product.rating'>☆</span>
+            </div>
         </div>
 
     </div>
@@ -56,20 +67,38 @@
             },
 
             computed: { // the Computed Property object
-                cartItemCount: function () { // the property name
+                cartCount: function () { // the property name
                     // its value is calculated when it is called
                     return this.cart.length || "0";
                 }
 
+                
+
             },
 
             methods: {
-                buy() {
-                    if (this.product.spaces > 0) {
-                        this.product.spaces--;
+                buy(product) {
+                    if (product.availableSpaces > 0) {
+                        product.availableSpaces--;
                     }
-                    this.cart.push(this.product.id);
+                    this.cart.push(product.id);
                 },
+
+                canBuy(product) {
+                    return product.availableSpaces > this.cartItemCount(product.spaces);
+                },
+
+                cartItemCount(id) {
+                    let count = 0;
+                    for (let i = 0; i < this.cart.length; i++) {
+                        if (this.cart[i] === id) {
+                            count++;
+                        }
+                    }
+                    return count;
+                }
+
+
             },
 
 

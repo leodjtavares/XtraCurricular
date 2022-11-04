@@ -116,3 +116,15 @@ button{
     color: white;
     border-radius: 5px;
 }
+
+.cart>h2{
+    text-align: center
+}
+
+.availability{
+    text-align: center
+}
+
+.rating{
+    text-align: center
+}
