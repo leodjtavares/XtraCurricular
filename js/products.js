@@ -35,4 +35,22 @@ let product = [
         availableSpaces: 20,
         rating: 1,
     },
+    
+    {
+        id: 1004,
+        activity: "Semi-Professional Football",
+        location: "Holloway",
+        price: 500.00,
+        availableSpaces: 20,
+        rating: 1,
+    },
+
+    {
+        id: 1004,
+        activity: "Professional Football",
+        location: "Madrid",
+        price: 5000.00,
+        availableSpaces: 20,
+        rating: 1,
+    },
 ]
