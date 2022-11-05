@@ -108,7 +108,14 @@ td,tr,th{
     margin-top: 3px;
     margin-left: 50px;
 }
+
 button{
+    background-color: rgb(68, 138, 199);
+    color: white;
+    border-radius: 5px;
+}
+
+.cartButton{
     display: flex;
     margin-left: 50px;
     margin-bottom: 5px;
@@ -116,6 +123,7 @@ button{
     color: white;
     border-radius: 5px;
 }
+
 
 .cart>h2{
     text-align: center

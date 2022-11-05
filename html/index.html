@@ -7,6 +7,7 @@
 <head>
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
     <script src="../js/products.js"></script>
+    <script src="../js/sortby.js"></script>
     <title>XtraCurricular Zone</title>
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/5.15.1/css/all.min.css">
@@ -32,26 +33,39 @@
         <div id="top-nav-center"></div>
         <!-- The <div> ID will be used to link to the Vue.js code -->
         <h1>Activities</h1>
+        Sort by:<br>
+        <input type="radio" id="lowToHigh" name="sort" value="lowToHigh">
+        <label for="lowToHigh">Price: Low to High</label>
+        <input type="radio" id="highToLow" name="sort" value="highToLow">
+        <label for="highToLow">Price: High to Low</label>
+        <button id="btn">Sort</button>
 
 
-        <div v-for="product in products" class="cart">
 
-            <h2>{{product.activity}}</h2>
-            <p>Price: £{{product.price}}</p>
-            <p>Location: {{product.location}}</p>
-            <p>Spaces Left: {{product.availableSpaces}}</p>
-            <div><button v-on:click="buy(product)" v-if='canBuy(product)'>Buy</button>
+        <div v-if="sort === lowToHigh">
+            <div v-for="product in products" class="cart">
+                <h2>{{product.activity}}</h2>
+                <p>Price: £{{product.price}}</p>
+                <p>Location: {{product.location}}</p>
+                <p>Spaces Left: {{product.availableSpaces}}</p>
+                <div><button class="cartButton" v-on:click="buy(product)" v-if='canBuy(product)'>Buy</button>
+                </div>
+                <div class="availability">
+                    <span v-if='product.availableSpaces === cartItemCount(product.spaces)'>All out!</span>
+                    <span v-else-if="product.availableSpaces - cartItemCount(product.spaces) < 5">
+                        Only {{product.availableSpaces - cartItemCount(product.spaces)}} left!
+                    </span>
+                    <span v-else>Buy now!</span>
+                </div>
+                <div class="rating">
+                    <span v-for='n in product.rating'>★</span>
+                    <span v-for='n in 5 - product.rating'>☆</span>
+                </div>
             </div>
-            <div class="availability">
-                <span v-if='product.availableSpaces === cartItemCount(product.spaces)'>All out!</span>
-                <span v-else-if="product.availableSpaces - cartItemCount(product.spaces) < 5">
-                    Only {{product.availableSpaces - cartItemCount(product.spaces)}} left!
-                </span>
-                <span v-else>Buy now!</span>
-            </div>
-            <div class="rating">
-                <span v-for='n in product.rating'>★</span>
-                <span v-for='n in 5 - product.rating'>☆</span>
+        </div>
+        <div v-else>
+            <div v-for="product in products" class="cart">
+                Check
             </div>
         </div>
 
@@ -72,7 +86,7 @@
                     return this.cart.length || "0";
                 }
 
-                
+
 
             },
 
