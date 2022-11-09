@@ -1,59 +1,59 @@
-/* External styling sheet for most of the styling. Internal styling was used in common.php for the currently active page styling.*/
 
-* {    
+* {
     box-sizing: border-box;
 }
 
-/* styles for the entire navigation bar  */
+/* styles for the entire navigation bar excluding search box  */
 #top-nav-left,
 #top-nav-center,
 #top-nav-right,
-#top-nav {    
+#top-nav {
     height: 60px;
-    background-color: #333;    
+    background-color: #333;
     padding: 10px;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 /*  styles and structure for the generic page body*/
-body { /* color + page starts from the edges. */
+body {
+    /* color + page starts from the edges. */
     background-color: rgba(211, 211, 211, 0.487);
-    margin: 0;   
+    margin: 0;
 }
 
 /* structures for the top navigation bar (left area only) */
-#top-nav-left {    
+#top-nav-left {
     float: left;
-    overflow: hidden;    
+    overflow: hidden;
 }
 
 /*  structures for the top navigation bar (centre area only) */
-#top-nav {    
+#top-nav {
     float: none;
     overflow-y: visible;
 }
 
 /*structures for the top navigation bar (right area only)*/
-#top-nav-right {    
+#top-nav-right {
     float: right;
     overflow: hidden;
 }
 
 /*  styling for the top navigation bar anchors (left area only)  */
-#top-nav-left a {    
+#top-nav-left a {
     display: block;
     color: #ffffff;
     text-decoration: none;
 }
 
 /*  styling for the top navigation bar anchors on hover (left area only) */
-#top-nav-left a:hover {    
+#top-nav-left a:hover {
     background-color: #e41575;
     color: black;
 }
 
 /*  styling for the top navigation bar anchors (right area only) */
-#top-nav-right a {    
+#top-nav-right a {
     float: left;
     display: block;
     color: #ffffff;
@@ -62,61 +62,53 @@ body { /* color + page starts from the edges. */
 }
 
 /*  styling for the top navigation bar anchors on hover (left area only) */
-#top-nav-right a:hover {    
+#top-nav-right a:hover {
     background-color: black;
     color: #e41575;
 }
 
+.search-container {
+    text-align: center;
+    display: inline-flex;
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.search-container input {
+    width: 50%;
+}
+
 /*  styling for the page footers */
-/* old background-color: lightgray; */
 #footer {
-    background-color: grey;    
+    background-color: grey;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     padding: 10px;
 }
 
 
-/*  styling and structure/postion for the table (leaderboards)*/
-.table {    
-    padding: 20px;
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-    font-size: 60px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid rgb(0, 0, 0);
-}
 
-/*  styling and structure/postion for the table rows */
-td,tr{    
-    border-bottom: 1px solid rgb(0, 0, 0);     
-}
-
-/*  styling and structure/postion for the table rows and headers */
-td,tr,th{
-    border-bottom: 1px solid rgb(0, 0, 0);     
-}
-
-
-.cart{
+.cart {
     width: 300px;
     border: 1px solid black;
     border-radius: 50px;
-    
-    
+    display: block;
+
+
 }
-.cart>p{
+
+.cart>p {
     margin-top: 3px;
     margin-left: 50px;
 }
 
-button{
+button {
     background-color: rgb(68, 138, 199);
     color: white;
     border-radius: 5px;
 }
 
-.cartButton{
+.cartButton {
     display: flex;
     margin-left: 50px;
     margin-bottom: 5px;
@@ -126,14 +118,14 @@ button{
 }
 
 
-.cart>h2{
+.cart>h2 {
     text-align: center
 }
 
-.availability{
+.availability {
     text-align: center
 }
 
-.rating{
+.rating {
     text-align: center
 }

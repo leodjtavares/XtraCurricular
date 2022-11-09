@@ -7,7 +7,6 @@ let product = [
         spaces: 5,
         availableSpaces: 5,
         rating: 2,
-
     },
 
     {
