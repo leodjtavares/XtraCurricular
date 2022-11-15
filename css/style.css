@@ -89,10 +89,11 @@ body {
 
 
 .cart {
-    width: 300px;
+    width: 500px;
     border: 1px solid black;
     border-radius: 50px;
     display: block;
+    text-align: center
 
 
 }
@@ -115,6 +116,7 @@ button {
     background-color: rgb(68, 138, 199);
     color: white;
     border-radius: 5px;
+    text-align: center
 }
 
 

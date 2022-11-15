@@ -34,7 +34,7 @@
         <div id="top-nav-center">
             <div class="search-container">
                 <form>
-                    <input type="text" placeholder="Search by Subject, Location, etc..." >
+                    <input type="text" placeholder="Search by Subject, Location, etc...">
                 </form>
             </div>
 
@@ -64,15 +64,18 @@
 
 
 
-       
-
         <div v-for="product in products">
             <br>
             <div class="cart">
                 <h2>{{product.activity}}</h2>
-                <p>Price: £{{product.price}}</p>
+                <!-- <p>Price: £{{product.price}}</p>
                 <p>Location: {{product.location}}</p>
-                <p>Spaces Left: {{product.availableSpaces}}</p>
+                <p>Spaces Left: {{product.availableSpaces}}</p> -->
+                <p>Price: £{{product.price}}
+                    Location: {{product.location}} 
+                    Spaces Left: {{product.availableSpaces}}</p>
+                <p></p>
+                <p></p>
                 <div><button class="cartButton" v-on:click="buy(product)" v-if='canBuy(product)'>Buy</button>
                 </div>
                 <div class="availability">
@@ -106,9 +109,6 @@
                     // its value is calculated when it is called
                     return this.cart.length || "0";
                 }
-
-
-
             },
 
             methods: {
