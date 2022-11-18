@@ -7,7 +7,12 @@
 <head>
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
     <script src="../js/activities.js"></script>
-    <script src="../js/sortby.js"></script>
+
+    <script>
+        function check(sort) {
+            document.getElementById("answer").value = sort
+        }
+    </script>
     <title>XtraCurricular Zone</title>
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome/5.15.1/css/all.min.css">
@@ -34,48 +39,64 @@
         <div id="top-nav-center">
             <div class="search-container">
                 <form>
-                    <input type="text" placeholder="Search by Subject, Location, etc...">
+                    <input type="text" placeholder="Search by Subject, Location, etc..." v-model="searchString">
                 </form>
             </div>
 
         </div>
         <!-- The <div> ID will be used to link to the Vue.js code -->
-        <h1>Activities</h1>
+
+
+
+         <h1>Activities</h1>
         Sort by:<br>
-        <input type="radio" id="priceA" name="sort" value="priceA">
-        <label for="lowToHigh">Price: Low to High</label>
-        <input type="radio" id="priceZ" name="sort" value="priceZ">
-        <label for="highToLow">Price: High to Low</label><br>
-        <input type="radio" id="availabilityA" name="sort" value="availabilityA">
-        <label for="lowToHigh">Availability: Low to High</label>
-        <input type="radio" id="availabilityZ" name="sort" value="availabilityZ">
-        <label for="highToLow">Availability: High to Low</label><br>
-        <input type="radio" id="subjectA" name="sort" value="subjectA">
-        <label for="highToLow">Name: A to Z</label>
-        <input type="radio" id="subjectZ" name="sort" value="subjectZ">
-        <label for="highToLow">Name: Z to A</A></label><br>
-        <input type="radio" id="locationA" name="sort" value="locationA">
-        <label for="highToLow">Location: A to Z</A></label>
-        <input type="radio" id="locationZ" name="sort" value="locationZ">
-        <label for="highToLow">Location: Z to A</A></label><br>
+        <input type="radio" v-on:click="sortingBy = 'price'" id="price" name="sort" value="price"
+            onclick="check(this.value,document.getElementById('ascending'),document.getElementById('descending'))">
+        <label for="price">Price</label>
 
+        <input type="radio" v-on:click="sortingBy = 'availableSpaces'" id="availability" name="sort" value="availability" onclick="check(this.value)">
+        <label for="availability">Availability</label>
+
+        <input type="radio" v-on:click="sortingBy = 'activity'" id="subject" name="sort" value="subject"
+            onclick="check(this.value)">
+        <label for="subject">Name</label>
+
+        <input type="radio" v-on:click="sortingBy = 'location'" id="location" name="sort" value="location"
+            onclick="check(this.value)">
+        <label for="location">Location</A></label>
+
+        <br>Test: <input type="text" id="answer" size="20">
+
+        <div id="order">
+            <button v-on:click="order = 'Ascending'">Ascending</button>
+            <button v-on:click="order = 'Ascending'"onclick="order()">Ascending</button>
+            <button v-on:click="order = 'Descending'">Descending</button>
+            <button v-on:click="order = 'Descending'">Descending</button>
+
+            <input type="radio" v-on:click="order = 'Ascending'" id="ascending" name="order" value="ascending" onclick="order()">
+            <label for="price">Ascending</label>
+            <input type="radio" v-on:click="order = 'Descending'" id="descending" name="order" value="descending" onclick="order()">
+            <label for="price">Descending</label>
+        </div>
+
+        <!--         
         <button id="sort-btn">Sort</button>
-        <button id="reset-btn">Reset</button>
+        <button id="reset-btn">Reset</button> -->
 
 
 
-        <div v-for="product in products">
+        <div v-for="product in sortedItems">
             <br>
             <div class="cart">
                 <h2>{{product.activity}}</h2>
                 <!-- <p>Price: £{{product.price}}</p>
                 <p>Location: {{product.location}}</p>
                 <p>Spaces Left: {{product.availableSpaces}}</p> -->
+                <img v-bind:src="product.image">
                 <p>Price: £{{product.price}}
-                    Location: {{product.location}} 
+                    Location: {{product.location}}
                     Spaces Left: {{product.availableSpaces}}</p>
-                <p></p>
-                <p></p>
+                
                 <div><button class="cartButton" v-on:click="buy(product)" v-if='canBuy(product)'>Buy</button>
                 </div>
                 <div class="availability">
@@ -99,6 +120,11 @@
         let app = new Vue({ // the root Vue instance
             el: '#app', // this links to the <div> with the ID #app
             data: {
+                sortingBy: '',
+                order: '',
+
+                searchString: '',
+
                 products: product,
 
                 cart: []
@@ -108,7 +134,47 @@
                 cartCount: function () { // the property name
                     // its value is calculated when it is called
                     return this.cart.length || "0";
-                }
+                },
+
+                sortedItems: function () {
+                    let searchString = this.searchString;
+                    const sortedActivities = this.products.sort((a, b) => {
+
+                        if (order.value = 'Ascending') {
+                            if (a[this.sortingBy] < b[this.sortingBy]) return -1
+                            if (a[this.sortingBy] > b[this.sortingBy]) return 1
+                            return 0
+                            console.log("Ascending")
+                        }
+                        else if (order.value = 'Descending') {
+                            if (a[this.sortingBy] < b[this.sortingBy]) return 1
+                            if (a[this.sortingBy] > b[this.sortingBy]) return -1
+                            return 0
+                            console.log("Descending")
+                        }
+                    });
+
+                    if (!searchString) {
+                        return sortedActivities;
+                    } else {
+                        // this line identify and our searcg input letter if uppercase it identify and convert it inro small case
+                        searchString = searchString.trim().toLowerCase();
+                        // here we search work by subject
+                        const search_array = sortedActivities.filter((item) => {
+                            if (item.activity.toLowerCase().indexOf(searchString) !== -1) {
+                                // the final result return
+                                return item;
+                            }
+                        });
+                        return search_array;
+                    }
+                },
+
+
+
+
+
+
             },
 
             methods: {
@@ -131,7 +197,9 @@
                         }
                     }
                     return count;
-                }
+                },
+
+
 
 
             },
