@@ -13,7 +13,7 @@ let product = [
     {
         id: 1002,
         activity: "Science Revision",
-        image: "../img/maths.jpeg",
+        image: "../img/science.png",
         location: "London",
         price: 20.00,
         spaces: 10,
@@ -24,7 +24,7 @@ let product = [
     {
         id: 1003,
         activity: "English Revision",
-        image: "../img/maths.jpeg",
+        image: "../img/english.jpg",
         location: "Manchester",
         price: 150.00,
         spaces: 10,
@@ -35,8 +35,8 @@ let product = [
     {
         id: 1004,
         activity: "Playground Football",
-        image: "../img/maths.jpeg",
-        location: "Totthenham",
+        image: "../img/pfootball.jpg",
+        location: "Tottenham",
         price: 5.00,
         spaces: 20,
         availableSpaces: 20,
@@ -46,7 +46,7 @@ let product = [
     {
         id: 1005,
         activity: "Semi-Professional Football",
-        image: "../img/maths.jpeg",
+        image: "../img/semifootball.jpg",
         location: "Holloway",
         price: 500.00,
         spaces: 5,
@@ -57,7 +57,7 @@ let product = [
     {
         id: 1006,
         activity: "Professional Football",
-        image: "../img/maths.jpeg",
+        image: "../img/profootball.jpg",
         location: "Madrid",
         price: 5000.00,
         spaces: 5,
@@ -68,7 +68,7 @@ let product = [
     {
         id: 1007,
         activity: "Swimming",
-        image: "../img/maths.jpeg",
+        image: "../img/swimming.jpg",
         location: "Edmonton",
         price: 50.00,
         spaces: 35,
@@ -79,7 +79,7 @@ let product = [
     {
         id: 1008,
         activity: "Rounders",
-        image: "../img/maths.jpeg",
+        image: "../img/rounders.jpg",
         location: "Enfield",
         price: 5.00,
         spaces: 40,
@@ -90,7 +90,7 @@ let product = [
     {
         id: 1009,
         activity: "Badminton",
-        image: "../img/maths.jpeg",
+        image: "../img/badminton.jpg",
         location: "Enfield Town",
         price: 50.00,
         spaces: 10,
