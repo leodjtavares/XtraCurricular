@@ -26,7 +26,7 @@
             <a href="https://github.com/leodjtavares/leodjtavares.github.io">XtraCurricular Zone</a>
         </div>
         <div id="top-nav-right">
-            <button> Basket({{cartCount}})</button>
+
         </div>
         <div id="main"></div>
         <div id="top-nav-center">
@@ -41,22 +41,47 @@
 
 
 
+        <div class="cartModule">
+            <!-- overlay -->
+            <div class="Cart-overlay" v-if="showModule" @click="showModule = false"></div>
+            <button id="navBasket" v-on:click="showModule = true">Basket({{cartCount}})</button>
+            <!-- module -->
+            <div class="Cart-module" v-if="showModule">
+                <button class="close" v-on:click="showModule = false">x</button>
+                <h1>Cart</h1>
+                <table>
+                    <tr>
+                        <th>Picture</th>
+                        <th>Subject</th>
+                        <th>Location</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                    </tr>
+                    <tr v-for="(cart,n) in cart">
+                        <td><img v-bind:src="cart.image"></td>
+                        <td>{{cart.activity}}</td>
+                        <td>{{cart.location}}</td>
+                        <td>{{cart.price}}</td>
+                        <td><button v-on:click="removeCart(Product)">Remove</button></td>
+                    </tr>
+                </table>
+                <a href="checkout.html"><button>Checkout</button></a>
+            </div>
+        </div>
+
         <h1>Activities</h1>
         Sort by:<br>
-        <input type="radio" v-on:click="sortingBy = 'price'" id="price" name="sort" value="price"
-            onclick="check(this.value)">
+        <input type="radio" v-on:click="sortingBy = 'price'" id="price" name="sort" value="price">
         <label for="price">Price</label>
 
         <input type="radio" v-on:click="sortingBy = 'availableSpaces'" id="availability" name="sort"
-            value="availability" onclick="check(this.value)">
+            value="availability">
         <label for="availability">Availability</label>
 
-        <input type="radio" v-on:click="sortingBy = 'activity'" id="subject" name="sort" value="subject"
-            onclick="check(this.value)">
+        <input type="radio" v-on:click="sortingBy = 'activity'" id="subject" name="sort" value="subject">
         <label for="subject">Name</label>
 
-        <input type="radio" v-on:click="sortingBy = 'location'" id="location" name="sort" value="location"
-            onclick="check(this.value)">
+        <input type="radio" v-on:click="sortingBy = 'location'" id="location" name="sort" value="location">
         <label for="location">Location</A></label>
 
         <div id="order">
@@ -66,26 +91,17 @@
             <button v-on:click="order = 'Descending'">Descending</button> -->
 
             <input type="radio" v-on:click="order.value = 'Ascending'" id="ascending" name="order" value="ascending"
-                onclick="order.value = 'Ascending'">
+                onclick="order = 'Ascending'">
             <label for="price">Ascending</label>
             <input type="radio" v-on:click="order.value = 'Descending'" id="descending" name="order" value="descending"
-                onclick="order.value = 'Descending'">
+                onclick="order = 'Descending'">
             <label for="price">Descending</label>
         </div>
 
-        <!--         
-        <button id="sort-btn">Sort</button>
-        <button id="reset-btn">Reset</button> -->
-
-
-
-        <div v-for="product in sortedItems">
+        <div v-for="product in sortedItems" :key="product.id">
             <br>
             <div class="cart">
                 <h2>{{product.activity}}</h2>
-                <!-- <p>Price: £{{product.price}}</p>
-                <p>Location: {{product.location}}</p>
-                <p>Spaces Left: {{product.availableSpaces}}</p> -->
                 <img v-bind:src="product.image">
                 <p>Price: £{{product.price}}
                     Location: {{product.location}}
@@ -111,16 +127,18 @@
     </div>
 
     <script>
+
+
         let app = new Vue({ // the root Vue instance
             el: '#app', // this links to the <div> with the ID #app
             data: {
+
                 sortingBy: '',
                 order: '',
-
                 searchString: '',
 
                 products: product,
-
+                showModule: false,
                 cart: []
             },
 
@@ -165,10 +183,6 @@
                 },
 
 
-
-
-
-
             },
 
             methods: {
@@ -176,7 +190,13 @@
                     if (product.availableSpaces > 0) {
                         product.availableSpaces--;
                     }
-                    this.cart.push(product.id);
+                    this.cart.push({
+                        id: product.id,
+                        activity: product.activity,
+                        image: product.image,
+                        location: product.location,
+                        price: product.price,
+                    });
                 },
 
                 canBuy(product) {
@@ -193,12 +213,8 @@
                     return count;
                 },
 
-
-
-
-            },
-
-
+                
+            }
         })
     </script>
 </body>

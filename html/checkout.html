@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script>
+    <title>Checkout Form</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="top-nav-left">
+            <a href="https://github.com/leodjtavares/leodjtavares.github.io">XtraCurricular Zone</a>
+        </div>
+        <div id="top-nav-right">
+        </div>
+        <div id="main"></div>
+        <div id="top-nav-center">
+        </div>
+
+            <div id="Input Checkout">
+                <h3>Enter Information</h3>
+                <p>Name: <input type="text" v-model="Name"></p>
+                <p>Mobile Number: <input type="number" v-model="mobileNumber"></p>
+            </div>
+    
+            <div id="Output Checkout">
+                <h3>Order Information</h3>
+                <p> Name: {{Name}}</p>
+                <p>Mobile Number: {{mobileNumber}}</p>
+            </div>
+    
+            <div id="Submit">
+                <button  v-on:click="SubmitForm()" v-bind:disabled="this.Name == '' || this.mobileNumber == ' '">
+                    <span v-if="this.Name == ' ' || this.mobileNumber == ' '">Enter Details</span>
+                    <span v-else>Checkout</span>
+                </button>
+            </div>
+</body>
+<script>
+    let app = new Vue({ // the root Vue instance
+        el: '#app', // this links to the <div> with the ID #app
+        data: {
+            data() {
+                return {
+                    Name: '',
+                    mobileNumber: '',
+                }
+            },
+            methods: {
+                SubmitForm(){
+                    alert('Thank you. Your Order has been Submitted.' + this.Name)
+                }
+            },
+
+        },
+    })
+</script>
+
+</html>
